@@ -18,12 +18,17 @@ cd /app || exit 1;
 SETTINGS_DIR="/app/docroot/sites/default"
 
 # Install a database if there isn't one yet
-CURRENT_TABLES="$(as_build "drush sql-query 'SHOW TABLES;'" /app/docroot)"
-if [ "$CURRENT_TABLES" == '' ]; then
+set +e
+as_build "drush sql-query 'SHOW TABLES;' | grep -v cache | grep -q ''" /app/docroot
+HAS_CURRENT_TABLES=$?
+set -e
+if [ "$HAS_CURRENT_TABLES" -ne 0 ]; then
   chmod u+w "$SETTINGS_DIR" || true
   mkdir -p "$SETTINGS_DIR/files/"
+  chown build:build "$SETTINGS_DIR/files/"
   as_build "echo 'y' | drush site-install lightning" "/app/docroot"
   chmod a-w "$SETTINGS_DIR"
+  chown -R www-data:www-data "$SETTINGS_DIR/files/"
 fi
 
 # Download the static assets
