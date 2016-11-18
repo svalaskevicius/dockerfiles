@@ -1,4 +1,4 @@
-FROM quay.io/inviqa_images/solr:4.10
+FROM quay.io/inviqa_images/solr:4.10_v1
 
 MAINTAINER Kieren Evans <kieren.evans@inviqa.com>
 
