@@ -85,6 +85,13 @@ services:
     depends_on:
       - ubuntu
 
+  php_apache_56:
+    build:
+      context: ./php-apache/5.6/
+    image: quay.io/continuouspipe/php-apache:5.6_v1
+    depends_on:
+      - ubuntu
+
   php_nginx:
     build:
       context: ./php-nginx/7.0/
