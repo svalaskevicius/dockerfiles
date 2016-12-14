@@ -1,7 +1,7 @@
 # PHP 5.6 base
 
 ```
-FROM quay.io/continuouspipe/php-apache:5.6
+FROM quay.io/continuouspipe/php5.6-apache:v1.0
 ```
 
 ### Basic authentication
